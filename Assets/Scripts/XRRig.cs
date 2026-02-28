@@ -17,6 +17,11 @@ public class XRRig : MonoBehaviour
 
     private void Update()
     {
+        UpdateInput();
+    }
+
+    private void UpdateInput()
+    {
         var headPosition = _actions.Actions.HeadPosition.ReadValue<Vector3>();
         var headRotation = _actions.Actions.HeadRotation.ReadValue<Quaternion>();
         var left = _actions.Actions.LeftPose.ReadValue<PoseState>();
