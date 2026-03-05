@@ -127,6 +127,24 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftGrip"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0d31bc9-ed95-4784-801b-d2e9e0f09d76"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightGrip"",
+                    ""type"": ""Button"",
+                    ""id"": ""df801605-8aa5-45a7-8e1f-e7b9029e4d74"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -173,6 +191,28 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
                     ""action"": ""HeadRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b67d631-ac8d-413b-8712-647f2858b154"",
+                    ""path"": ""<XRController>{LeftHand}/{GripButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftGrip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a81e277-e4c9-40b3-9aec-23e77bffc587"",
+                    ""path"": ""<XRController>{RightHand}/{GripButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightGrip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +225,8 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
         m_Actions_RightPose = m_Actions.FindAction("RightPose", throwIfNotFound: true);
         m_Actions_HeadPosition = m_Actions.FindAction("HeadPosition", throwIfNotFound: true);
         m_Actions_HeadRotation = m_Actions.FindAction("HeadRotation", throwIfNotFound: true);
+        m_Actions_LeftGrip = m_Actions.FindAction("LeftGrip", throwIfNotFound: true);
+        m_Actions_RightGrip = m_Actions.FindAction("RightGrip", throwIfNotFound: true);
     }
 
     ~@XRActions()
@@ -269,6 +311,8 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_RightPose;
     private readonly InputAction m_Actions_HeadPosition;
     private readonly InputAction m_Actions_HeadRotation;
+    private readonly InputAction m_Actions_LeftGrip;
+    private readonly InputAction m_Actions_RightGrip;
     /// <summary>
     /// Provides access to input actions defined in input action map "Actions".
     /// </summary>
@@ -296,6 +340,14 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Actions/HeadRotation".
         /// </summary>
         public InputAction @HeadRotation => m_Wrapper.m_Actions_HeadRotation;
+        /// <summary>
+        /// Provides access to the underlying input action "Actions/LeftGrip".
+        /// </summary>
+        public InputAction @LeftGrip => m_Wrapper.m_Actions_LeftGrip;
+        /// <summary>
+        /// Provides access to the underlying input action "Actions/RightGrip".
+        /// </summary>
+        public InputAction @RightGrip => m_Wrapper.m_Actions_RightGrip;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -334,6 +386,12 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
             @HeadRotation.started += instance.OnHeadRotation;
             @HeadRotation.performed += instance.OnHeadRotation;
             @HeadRotation.canceled += instance.OnHeadRotation;
+            @LeftGrip.started += instance.OnLeftGrip;
+            @LeftGrip.performed += instance.OnLeftGrip;
+            @LeftGrip.canceled += instance.OnLeftGrip;
+            @RightGrip.started += instance.OnRightGrip;
+            @RightGrip.performed += instance.OnRightGrip;
+            @RightGrip.canceled += instance.OnRightGrip;
         }
 
         /// <summary>
@@ -357,6 +415,12 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
             @HeadRotation.started -= instance.OnHeadRotation;
             @HeadRotation.performed -= instance.OnHeadRotation;
             @HeadRotation.canceled -= instance.OnHeadRotation;
+            @LeftGrip.started -= instance.OnLeftGrip;
+            @LeftGrip.performed -= instance.OnLeftGrip;
+            @LeftGrip.canceled -= instance.OnLeftGrip;
+            @RightGrip.started -= instance.OnRightGrip;
+            @RightGrip.performed -= instance.OnRightGrip;
+            @RightGrip.canceled -= instance.OnRightGrip;
         }
 
         /// <summary>
@@ -425,5 +489,19 @@ public partial class @XRActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHeadRotation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftGrip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftGrip(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RightGrip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightGrip(InputAction.CallbackContext context);
     }
 }
